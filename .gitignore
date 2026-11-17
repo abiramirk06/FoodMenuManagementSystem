@@ -1,0 +1,15 @@
+
+# .NET generated files
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+
+# Angular generated files
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Secrets
+secrets.json
