@@ -1,0 +1,56 @@
+
+.container {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 25px;
+  color: #222;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  margin-right: 5px;
+}
+
+.add-button {
+  background-color: #198754;
+}
+
+.edit-button {
+  background-color: #0d6efd;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
