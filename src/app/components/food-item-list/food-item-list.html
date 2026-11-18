@@ -1,0 +1,75 @@
+
+<div class="container">
+
+  <h1>Food Menu Management</h1>
+
+  <button class="add-button"
+          (click)="openAddForm()"
+          *ngIf="!showForm">
+    + Add Food Item
+  </button>
+
+  <p class="success" *ngIf="successMessage">
+    {{ successMessage }}
+  </p>
+
+  <p class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+  <app-food-item-form
+    *ngIf="showForm"
+    [foodItem]="selectedFoodItem"
+    (saved)="saveFoodItem($event)"
+    (cancelled)="cancelForm()">
+  </app-food-item-form>
+
+  <div *ngIf="!showForm">
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Availability</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of foodItems">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.description || '-' }}</td>
+          <td>₹{{ item.price }}</td>
+
+          <td>
+            {{ item.isAvailable ? 'Available' : 'Not Available' }}
+          </td>
+
+          <td>
+            <button class="edit-button"
+                    (click)="openEditForm(item)">
+              Edit
+            </button>
+
+            <button class="delete-button"
+                    (click)="deleteFoodItem(item.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="foodItems.length === 0">
+      No food items found.
+    </p>
+
+  </div>
+
+</div>
