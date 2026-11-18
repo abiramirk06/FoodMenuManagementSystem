@@ -8,7 +8,6 @@ namespace FoodMenuAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class FoodItemsController : ControllerBase
 {
     private readonly IFoodItemService _service;
@@ -18,6 +17,7 @@ public class FoodItemsController : ControllerBase
         _service = service;
     }
 
+    // Everyone can view the menu
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAll()
@@ -38,6 +38,7 @@ public class FoodItemsController : ControllerBase
         return Ok(item);
     }
 
+    // Only Admin can add
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(FoodItem foodItem)
@@ -57,6 +58,7 @@ public class FoodItemsController : ControllerBase
         }
     }
 
+    // Only Admin can edit
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Update(int id, FoodItem foodItem)
@@ -76,6 +78,7 @@ public class FoodItemsController : ControllerBase
         }
     }
 
+    // Only Admin can delete
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)

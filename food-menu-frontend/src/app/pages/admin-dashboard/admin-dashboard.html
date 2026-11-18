@@ -1,0 +1,26 @@
+
+<div class="dashboard">
+
+  <header class="dashboard-header">
+    <div>
+      <h1>Food Menu Admin Dashboard</h1>
+      <p>Welcome, {{ adminName }}!</p>
+    </div>
+
+    <button class="logout-button" (click)="logout()">
+      Logout
+    </button>
+  </header>
+
+  <main class="dashboard-content">
+
+    <div class="welcome-section">
+      <h2>Manage Your Food Menu</h2>
+      <p>Add, update, view and delete food items from your menu.</p>
+    </div>
+
+    <app-food-item-list></app-food-item-list>
+
+  </main>
+
+</div>

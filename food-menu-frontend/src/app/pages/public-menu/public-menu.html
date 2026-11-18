@@ -1,0 +1,132 @@
+
+<div class="menu-page">
+
+  <header class="menu-header">
+    <div class="header-content">
+      <h1>🍽️ Food Menu</h1>
+      <p>Discover delicious food for every taste!</p>
+    </div>
+
+    <a routerLink="/admin/login" class="admin-link">
+      Admin Login
+    </a>
+  </header>
+
+  <main class="menu-content">
+
+    <section class="menu-heading">
+      <h2>Our Menu</h2>
+      <p>Explore our delicious collection of food items.</p>
+    </section>
+
+    <!-- Loading -->
+    <div class="loading" *ngIf="isLoading">
+      <p>Loading menu...</p>
+    </div>
+
+    <!-- Error -->
+    <p class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+
+    <ng-container *ngIf="!isLoading && !errorMessage">
+
+      <!-- Search and Filters -->
+      <section class="filter-section">
+
+        <input
+          type="text"
+          placeholder="Search food by name..."
+          [(ngModel)]="searchTerm"
+          class="search-input"
+        />
+
+        <select
+          [(ngModel)]="selectedCategory"
+          class="category-select"
+        >
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+
+        <label class="availability-filter">
+          <input
+            type="checkbox"
+            [(ngModel)]="showAvailableOnly"
+          />
+          Available only
+        </label>
+
+        <button class="reset-button" (click)="resetFilters()">
+          Reset
+        </button>
+
+      </section>
+
+      <!-- Food Cards -->
+      <section class="food-grid" *ngIf="filteredFoodItems.length > 0">
+
+        <div class="food-card" *ngFor="let item of filteredFoodItems">
+
+          <div class="food-image">
+            <span>🍴</span>
+          </div>
+
+          <div class="food-details">
+
+            <span class="category">
+              {{ item.category }}
+            </span>
+
+            <h3>{{ item.name }}</h3>
+
+            <p class="description">
+              {{ item.description || 'Delicious food, freshly prepared.' }}
+            </p>
+
+            <div class="food-footer">
+
+              <strong>₹{{ item.price }}</strong>
+
+              <span
+                class="availability"
+                [class.available]="item.isAvailable"
+                [class.unavailable]="!item.isAvailable"
+              >
+                {{ item.isAvailable ? 'Available' : 'Not Available' }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- No matching results -->
+      <div
+        class="empty-message"
+        *ngIf="filteredFoodItems.length === 0 && foodItems.length > 0"
+      >
+        <h3>No matching food items found.</h3>
+        <p>Try changing your search or filters.</p>
+        <button class="reset-button" (click)="resetFilters()">
+          Clear Filters
+        </button>
+      </div>
+
+      <!-- No food items -->
+      <div
+        class="empty-message"
+        *ngIf="foodItems.length === 0"
+      >
+        <h3>No food items available right now.</h3>
+      </div>
+
+    </ng-container>
+
+  </main>
+
+</div>
